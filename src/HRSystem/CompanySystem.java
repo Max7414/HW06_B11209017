@@ -38,8 +38,8 @@ public class CompanySystem {
 					{
 						if(checkPassWord == database.getStaffList().get(i).getPassword()) {
 							if (!database.getStaffList().get(i).isManager()){
-							memberService.generalStaffLogin(database.getStaffList().get(i).getName(), database.getStaffList().get(i).getDepartmentChoice(), database.getStaffList().get(i).getWorkNumber());
-						}
+								memberService.generalStaffLogin(database.getStaffList().get(i).getName(), database.getStaffList().get(i).getDepartmentChoice(), database.getStaffList().get(i).getWorkNumber());
+							}
 							else{
 								memberService.managerStaffLogin(database.getStaffList().get(i).getName(), database.getStaffList().get(i).getDepartmentChoice(), database.getStaffList().get(i).getWorkNumber());
 							}
@@ -167,6 +167,79 @@ public class CompanySystem {
 
 }
 
-
-
-
+//
+//****歡迎進入公司系統****
+//		1) 登入
+//2) 註冊
+//0) 離開
+//請輸入您的選擇 [1,2,0]:
+//		2
+//請輸入姓名
+//		test1
+//請輸入密碼
+//123
+//		1) 資訊部門
+//2) 人力資源
+//3) 行銷部門
+//請選擇部門:
+//		3
+//是否成為管理人員? [Y/n]
+//y
+//1
+//MA-10001
+//		****歡迎進入公司系統****
+//		1) 登入
+//2) 註冊
+//0) 離開
+//請輸入您的選擇 [1,2,0]:
+//		2
+//請輸入姓名
+//		test2
+//請輸入密碼
+//123
+//		1) 資訊部門
+//2) 人力資源
+//3) 行銷部門
+//請選擇部門:
+//		3
+//是否成為管理人員? [Y/n]
+//n
+//2
+//MA-00001
+//		****歡迎進入公司系統****
+//		1) 登入
+//2) 註冊
+//0) 離開
+//請輸入您的選擇 [1,2,0]:
+//		2
+//請輸入姓名
+//		test3
+//請輸入密碼
+//123
+//		1) 資訊部門
+//2) 人力資源
+//3) 行銷部門
+//請選擇部門:
+//		3
+//是否成為管理人員? [Y/n]
+//y
+//3
+//MA-10002
+//		****歡迎進入公司系統****
+//		1) 登入
+//2) 註冊
+//0) 離開
+//請輸入您的選擇 [1,2,0]:
+//		1
+//		[HRSystem.ManagerStaff@439f5b3d, HRSystem.GeneralStaff@1d56ce6a, HRSystem.ManagerStaff@5197848c]
+//請輸入工號
+//MA-10002
+//輸入密碼
+//123
+//查無此員工
+//		查無此員工
+//姓名:test3
+//部門:TEST
+//工號:MA-10002
+//TEST 部門名單:
+//
