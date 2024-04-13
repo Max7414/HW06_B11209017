@@ -7,7 +7,7 @@ public class Database {
 	 public void addArray(GeneralStaff generalStaff)
 	 {
 		 staffList.add(generalStaff);
-		 System.out.println(staffList.get(0));
+		 System.out.println(staffList.get(staffList.size()-1));
 	 }
 }
 

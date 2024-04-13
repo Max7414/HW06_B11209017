@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class CompanySystem {
 
 	public static void main(String[] args) {
-		int itNumber = 0,hrNumber = 0,maNumber = 0;
+		int itNumber = 0, hrNumber = 0, maNumber = 0;
 		while(true) {
 			int userChoice;
 
@@ -110,7 +110,7 @@ public class CompanySystem {
 				break;
 			}
 
-
+		System.out.println(workNumber);
 
 		}
 
@@ -118,3 +118,14 @@ public class CompanySystem {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
