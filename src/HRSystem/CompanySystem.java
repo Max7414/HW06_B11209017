@@ -1,16 +1,22 @@
 package HRSystem;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class CompanySystem {
 
 	public static void main(String[] args) {
 		int itNumber = 0, hrNumber = 0, maNumber = 0;
+		int itManagerNumber = 0, hrManagerNumber = 0, maManagerNumber = 0;
+		Database database = new Database();
+		MemberService memberService = new MemberService();
+
 		while(true) {
 			int userChoice;
 
 			String workNumber = "";
 			Scanner sc = new Scanner(System.in);
-			Database database = new Database();
+
+
 
 			System.out.println("****歡迎進入公司系統****");
 			System.out.println("1) 登入");
@@ -22,9 +28,27 @@ public class CompanySystem {
 			sc.nextLine();
 			switch(userChoice){
 			case 1:
+				System.out.println(database.getStaffList());
 				System.out.println("請輸入工號");
-				String checkNumber = sc.nextLine();
+				String checkNumber = sc.nextLine().trim();
 				System.out.println("輸入密碼");
+				int checkPassWord = sc.nextInt();
+
+				for(int i = 0; i<database.getStaffList().size(); i++){
+					if(Objects.equals(database.getStaffList().get(i).getWorkNumber(), checkNumber))
+					{
+						if(checkPassWord == database.getStaffList().get(i).getPassword()) {
+							memberService.generalStaffLogin(database.getStaffList().get(i).getName(), database.getStaffList().get(i).getDepartmentChoice(), database.getStaffList().get(i).getWorkNumber());
+							break;
+						}
+						else {
+							System.out.println("密碼錯誤");
+						}
+					}
+					else{
+						System.out.println("查無此員工");
+					}
+				}
 
 				break;
 			case 2:
@@ -49,25 +73,7 @@ public class CompanySystem {
 					sc.nextLine(); // Consume the newline left by nextInt()
 				}
 
-				switch(departmentChoice) {
-					case 1:
-						itNumber++;
-						workNumber = String.format("%s%05d",departmant[departmentChoice-1], itNumber);
 
-						break;
-					case 2:
-						hrNumber++;
-						workNumber = String.format("%s%05d",departmant[departmentChoice-1], hrNumber);
-
-						break;
-					case 3:
-						maNumber++;
-						workNumber = String.format("%s%05d",departmant[departmentChoice-1], maNumber);
-
-						break;
-					default:
-						System.out.println("無效選擇");
-				}
 
 				System.out.println("是否成為管理人員? [Y/n]");
 
@@ -87,6 +93,44 @@ public class CompanySystem {
 					}
 					else
 						continue;
+				}
+
+				switch(departmentChoice) {
+					case 1:
+
+						if(!isManager) {
+                            itNumber++;
+							workNumber = String.format("%s%05d", departmant[departmentChoice - 1], itNumber);
+						}
+						else {
+							itManagerNumber++;
+							workNumber = String.format("%s1%04d", departmant[departmentChoice - 1], itManagerNumber);
+						}
+
+						break;
+					case 2:
+						if(!isManager){
+							hrNumber++;
+							workNumber = String.format("%s%05d",departmant[departmentChoice-1], hrNumber);
+						}
+						else {
+							hrManagerNumber++;
+							workNumber = String.format("%s1%04d", departmant[departmentChoice - 1], hrManagerNumber);
+						}
+						break;
+					case 3:
+
+						if(!isManager) {
+							maNumber++;
+							workNumber = String.format("%s%05d", departmant[departmentChoice - 1], maNumber);
+						}
+						else {
+							maManagerNumber++;
+							workNumber = String.format("%s1%04d", departmant[departmentChoice - 1], maManagerNumber);
+						}
+						break;
+					default:
+						System.out.println("無效選擇");
 				}
 
 				GeneralStaff generalStaff;
@@ -118,13 +162,6 @@ public class CompanySystem {
 	}
 
 }
-
-
-
-
-
-
-
 
 
 
