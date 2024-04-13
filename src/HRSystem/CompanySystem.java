@@ -8,7 +8,7 @@ public class CompanySystem {
 		int itNumber = 0, hrNumber = 0, maNumber = 0;
 		int itManagerNumber = 0, hrManagerNumber = 0, maManagerNumber = 0;
 		Database database = new Database();
-		MemberService memberService = new MemberService();
+		MemberService memberService = new MemberService(database);
 
 		while(true) {
 			int userChoice;
@@ -41,7 +41,7 @@ public class CompanySystem {
 								memberService.generalStaffLogin(database.getStaffList().get(i).getName(), database.getStaffList().get(i).getDepartmentChoice(), database.getStaffList().get(i).getWorkNumber());
 							}
 							else{
-								memberService.managerStaffLogin(database.getStaffList().get(i).getName(), database.getStaffList().get(i).getDepartmentChoice(), database.getStaffList().get(i).getWorkNumber());
+								memberService.managerStaffLogin(database.getStaffList().get(i).getName(), database.getStaffList().get(i).getDepartmentChoice(), database.getStaffList().get(i).getWorkNumber(),database.getStaffList().size());
 							}
 							break;
 						}
