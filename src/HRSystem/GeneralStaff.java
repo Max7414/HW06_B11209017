@@ -4,17 +4,26 @@ public class GeneralStaff {
 	private String name;
 	private int password;
 
+	public boolean isManager() {
+		return isManager;
+	}
 
+	public void setManager(boolean manager) {
+		isManager = manager;
+	}
+
+	private boolean isManager;
 	private String workNumber ;
 
 
 	private int departmentChoice;
 
-	GeneralStaff(String name, int password, int departmentChoice, String workNumber){
+	GeneralStaff(String name, int password, int departmentChoice,boolean isManager, String workNumber){
 		this.setName(name);
 		this.setPassword(password);
 		this.setDepartmentChoice(departmentChoice);
 		this.setWorkNumber(workNumber);
+		this.setManager(isManager);
 	}
 	public String getName() {
 		return name;

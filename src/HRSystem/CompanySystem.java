@@ -3,7 +3,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class CompanySystem {
-
+//add num to obj
 	public static void main(String[] args) {
 		int itNumber = 0, hrNumber = 0, maNumber = 0;
 		int itManagerNumber = 0, hrManagerNumber = 0, maManagerNumber = 0;
@@ -16,8 +16,6 @@ public class CompanySystem {
 			String workNumber = "";
 			Scanner sc = new Scanner(System.in);
 
-
-
 			System.out.println("****歡迎進入公司系統****");
 			System.out.println("1) 登入");
 			System.out.println("2) 註冊");
@@ -29,6 +27,7 @@ public class CompanySystem {
 			switch(userChoice){
 			case 1:
 				System.out.println(database.getStaffList());
+
 				System.out.println("請輸入工號");
 				String checkNumber = sc.nextLine().trim();
 				System.out.println("輸入密碼");
@@ -38,7 +37,12 @@ public class CompanySystem {
 					if(Objects.equals(database.getStaffList().get(i).getWorkNumber(), checkNumber))
 					{
 						if(checkPassWord == database.getStaffList().get(i).getPassword()) {
+							if (!database.getStaffList().get(i).isManager()){
 							memberService.generalStaffLogin(database.getStaffList().get(i).getName(), database.getStaffList().get(i).getDepartmentChoice(), database.getStaffList().get(i).getWorkNumber());
+						}
+							else{
+								memberService.managerStaffLogin(database.getStaffList().get(i).getName(), database.getStaffList().get(i).getDepartmentChoice(), database.getStaffList().get(i).getWorkNumber());
+							}
 							break;
 						}
 						else {
@@ -139,7 +143,7 @@ public class CompanySystem {
 
 				if(!isManager)
 				{
-					generalStaff = new GeneralStaff(name, password, departmentChoice, workNumber);
+					generalStaff = new GeneralStaff(name, password, departmentChoice, isManager, workNumber);
 					database.addArray(generalStaff);
 				}
 				else
