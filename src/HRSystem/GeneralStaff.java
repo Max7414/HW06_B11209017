@@ -2,7 +2,7 @@ package HRSystem;
 
 public class GeneralStaff {
 	private String name;
-	private int password;
+	private String password;
 
 	public boolean isManager() {
 		return isManager;
@@ -18,7 +18,7 @@ public class GeneralStaff {
 
 	private int departmentChoice;
 
-	GeneralStaff(String name, int password, int departmentChoice,boolean isManager, String workNumber){
+	GeneralStaff(String name, String password, int departmentChoice,boolean isManager, String workNumber){
 		this.setName(name);
 		this.setPassword(password);
 		this.setDepartmentChoice(departmentChoice);
@@ -31,10 +31,10 @@ public class GeneralStaff {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPassword() {
+	public String getPassword() {
 		return password;
 	}
-	public void setPassword(int password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 	public int getDepartmentChoice() {
@@ -50,6 +50,5 @@ public class GeneralStaff {
 	public void setWorkNumber(String workNumber) {
 		this.workNumber = workNumber;
 	}
-
 
 }

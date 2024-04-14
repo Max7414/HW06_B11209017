@@ -11,7 +11,7 @@ public class CompanySystem {
 		MemberService memberService = new MemberService(database);
 
 		while(true) {
-			int userChoice;
+			int userChoice = 3;
 
 			String workNumber = "";
 			Scanner sc = new Scanner(System.in);
@@ -22,26 +22,31 @@ public class CompanySystem {
 			System.out.println("0) 離開");
 			System.out.println("請輸入您的選擇 [1,2,0]: ");
 
-			userChoice = sc.nextInt();
+			if(sc.hasNextInt()){
+				userChoice = sc.nextInt();
+			}else{
+				System.out.println("請輸入整數");
+			}
+
 			sc.nextLine();
 			switch(userChoice){
 			case 1:
-				System.out.println(database.getStaffList());
-
 				System.out.println("請輸入工號");
 				String checkNumber = sc.nextLine().trim();
 				System.out.println("輸入密碼");
-				int checkPassWord = sc.nextInt();
+				String checkPassWord = sc.nextLine();
+				boolean foundStaff = false;
 
 				for(int i = 0; i<database.getStaffList().size(); i++){
 					if(Objects.equals(database.getStaffList().get(i).getWorkNumber(), checkNumber))
 					{
-						if(checkPassWord == database.getStaffList().get(i).getPassword()) {
+						foundStaff = true;
+						if(Objects.equals(checkPassWord, database.getStaffList().get(i).getPassword())) {
 							if (!database.getStaffList().get(i).isManager()){
 								memberService.generalStaffLogin(database.getStaffList().get(i).getName(), database.getStaffList().get(i).getDepartmentChoice(), database.getStaffList().get(i).getWorkNumber());
 							}
 							else{
-								memberService.managerStaffLogin(database.getStaffList().get(i).getName(), database.getStaffList().get(i).getDepartmentChoice(), database.getStaffList().get(i).getWorkNumber(),database.getStaffList().size());
+								memberService.managerStaffLogin(database.getStaffList().get(i).getName(), database.getStaffList().get(i).getDepartmentChoice(), database.getStaffList().get(i).getWorkNumber());
 							}
 							break;
 						}
@@ -49,17 +54,17 @@ public class CompanySystem {
 							System.out.println("密碼錯誤");
 						}
 					}
-					else{
-						System.out.println("查無此員工");
-					}
 				}
+				if(!foundStaff)
+					System.out.println("查無此員工");
+
 
 				break;
 			case 2:
 				System.out.println("請輸入姓名");
-				String name = sc.next();
+				String name = sc.nextLine();
 				System.out.println("請輸入密碼");
-				int password = sc.nextInt();
+				String password = sc.nextLine();
 
 				System.out.println("1) 資訊部門");
 				System.out.println("2) 人力資源");
@@ -74,7 +79,7 @@ public class CompanySystem {
 				while (departmentChoice < 1 || departmentChoice > 3) {
 					System.out.println("無效的選擇，請重新選擇部門:");
 					departmentChoice = sc.nextInt();
-					sc.nextLine(); // Consume the newline left by nextInt()
+					sc.nextLine();
 				}
 
 
@@ -95,8 +100,7 @@ public class CompanySystem {
 						isManager = false;
 						break;
 					}
-					else
-						continue;
+
 				}
 
 				switch(departmentChoice) {
@@ -133,8 +137,6 @@ public class CompanySystem {
 							workNumber = String.format("%s1%04d", departmant[departmentChoice - 1], maManagerNumber);
 						}
 						break;
-					default:
-						System.out.println("無效選擇");
 				}
 
 				GeneralStaff generalStaff;
@@ -143,103 +145,27 @@ public class CompanySystem {
 
 				if(!isManager)
 				{
-					generalStaff = new GeneralStaff(name, password, departmentChoice, isManager, workNumber);
+					generalStaff = new GeneralStaff(name, password, departmentChoice, false, workNumber);
 					database.addArray(generalStaff);
 				}
 				else
 				{
-					managerStaff  = new ManagerStaff(name, password, departmentChoice, isManager, workNumber);
+					managerStaff  = new ManagerStaff(name, password, departmentChoice, true, workNumber);
 					database.addArray(managerStaff);
 				}
-
+				System.out.println("註冊成功!");
 				break;
 			case 0:
 				System.exit(0);
 				break;
+			default:
+				System.out.println("輸入錯誤!");
 			}
 
-		System.out.println(workNumber);
+
+
 
 		}
-
-
 	}
-
 }
 
-//
-//****歡迎進入公司系統****
-//		1) 登入
-//2) 註冊
-//0) 離開
-//請輸入您的選擇 [1,2,0]:
-//		2
-//請輸入姓名
-//		test1
-//請輸入密碼
-//123
-//		1) 資訊部門
-//2) 人力資源
-//3) 行銷部門
-//請選擇部門:
-//		3
-//是否成為管理人員? [Y/n]
-//y
-//1
-//MA-10001
-//		****歡迎進入公司系統****
-//		1) 登入
-//2) 註冊
-//0) 離開
-//請輸入您的選擇 [1,2,0]:
-//		2
-//請輸入姓名
-//		test2
-//請輸入密碼
-//123
-//		1) 資訊部門
-//2) 人力資源
-//3) 行銷部門
-//請選擇部門:
-//		3
-//是否成為管理人員? [Y/n]
-//n
-//2
-//MA-00001
-//		****歡迎進入公司系統****
-//		1) 登入
-//2) 註冊
-//0) 離開
-//請輸入您的選擇 [1,2,0]:
-//		2
-//請輸入姓名
-//		test3
-//請輸入密碼
-//123
-//		1) 資訊部門
-//2) 人力資源
-//3) 行銷部門
-//請選擇部門:
-//		3
-//是否成為管理人員? [Y/n]
-//y
-//3
-//MA-10002
-//		****歡迎進入公司系統****
-//		1) 登入
-//2) 註冊
-//0) 離開
-//請輸入您的選擇 [1,2,0]:
-//		1
-//		[HRSystem.ManagerStaff@439f5b3d, HRSystem.GeneralStaff@1d56ce6a, HRSystem.ManagerStaff@5197848c]
-//請輸入工號
-//MA-10002
-//輸入密碼
-//123
-//查無此員工
-//		查無此員工
-//姓名:test3
-//部門:TEST
-//工號:MA-10002
-//TEST 部門名單:
-//
