@@ -108,33 +108,33 @@ public class CompanySystem {
 
 						if(!isManager) {
                             itNumber++;
-							workNumber = String.format("%s%05d", departmant[departmentChoice - 1], itNumber);
+							workNumber = String.format("%s%06d", departmant[departmentChoice - 1], itNumber);
 						}
 						else {
 							itManagerNumber++;
-							workNumber = String.format("%s1%04d", departmant[departmentChoice - 1], itManagerNumber);
+							workNumber = String.format("%s1%05d", departmant[departmentChoice - 1], itManagerNumber);
 						}
 
 						break;
 					case 2:
 						if(!isManager){
 							hrNumber++;
-							workNumber = String.format("%s%05d",departmant[departmentChoice-1], hrNumber);
+							workNumber = String.format("%s%06d",departmant[departmentChoice-1], hrNumber);
 						}
 						else {
 							hrManagerNumber++;
-							workNumber = String.format("%s1%04d", departmant[departmentChoice - 1], hrManagerNumber);
+							workNumber = String.format("%s1%05d", departmant[departmentChoice - 1], hrManagerNumber);
 						}
 						break;
 					case 3:
 
 						if(!isManager) {
 							maNumber++;
-							workNumber = String.format("%s%05d", departmant[departmentChoice - 1], maNumber);
+							workNumber = String.format("%s%06d", departmant[departmentChoice - 1], maNumber);
 						}
 						else {
 							maManagerNumber++;
-							workNumber = String.format("%s1%04d", departmant[departmentChoice - 1], maManagerNumber);
+							workNumber = String.format("%s1%05d", departmant[departmentChoice - 1], maManagerNumber);
 						}
 						break;
 				}
